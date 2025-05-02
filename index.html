@@ -21,66 +21,29 @@
       background: #fffaf0;
       width: 90%;
       max-width: 800px;
-      position: relative;
-      
-    .title-container {
-      
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 10px;
-}
+    }
 
-.title-container .medal {
-  width: 50px;
-  height: auto;
-}
+    .title-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .title-container .medal {
+      width: 30px;
+      height: auto;
+    }
 
     h1.title {
       font-size: 40px;
-      margin: 10px 0 0 0;
+      margin: 10px 0;
       position: relative;
       border: 2px dotted #a67c52;
       padding: 10px;
       display: inline-block;
       background-color: #fcebd2;
-    }
-
-    .recipient {
-      font-size: 28px;
-      font-weight: bold;
-      background-color: #fcebd2;
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 10px;
-      margin: 20px 0 10px 0;
-    }
-
-    .grade {
-      font-size: 22px;
-      margin-top: 5px;
-    }
-
-    .thanks {
-      font-size: 20px;
-      margin-top: 20px;
-      line-height: 1.8;
-      white-space: pre-line;
-    }
-
-    .school-director {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 40px;
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    .signature {
-      text-align: center;
-      font-weight: bold;
     }
 
     .input-section {
@@ -93,7 +56,7 @@
       border: 2px dotted #a67c52;
     }
 
-    .input-section input, select, textarea {
+    .input-section input, select {
       display: block;
       margin: 10px auto;
       padding: 10px;
@@ -141,18 +104,36 @@
       margin: 30px auto;
     }
 
-    .footer-buttons {
-      margin-top: 20px;
+    .recipient {
+      font-size: 28px;
+      font-weight: bold;
+      background-color: #fcebd2;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin: 10px 0;
     }
 
-    @media print {
-      .input-section, .btn, #popup, .footer-buttons {
-        display: none;
-      }
+    .grade {
+      font-size: 22px;
+      margin-top: 5px;
+    }
 
-      #final-certificate {
-        display: block !important;
-      }
+    .school-director {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+
+    .thanks {
+      font-size: 20px;
+      margin-top: 20px;
+      line-height: 1.7;
+    }
+
+    .footer-buttons {
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -160,15 +141,14 @@
 
   <div class="input-section">
     <h2>بيانات الشهادة</h2>
-    <select id="type" onchange="hideCertificate()">
+    <select id="type">
       <option value="الطالب">الطالب</option>
       <option value="الطالبة">الطالبة</option>
     </select>
-    <input type="text" id="name" placeholder="أدخل الاسم هنا" oninput="hideCertificate()">
-    <input type="text" id="grade" placeholder="أدخل الصف" oninput="hideCertificate()">
-    <input type="text" id="school" placeholder="أدخل اسم المدرسة" oninput="hideCertificate()">
-    <input type="text" id="director" placeholder="أدخل اسم المدير/ة" oninput="hideCertificate()">
-    <textarea id="thanks-input" rows="4" placeholder="أدخل عبارات الشكر" oninput="hideCertificate()"></textarea>
+    <input type="text" id="name" placeholder="أدخل الاسم هنا">
+    <input type="text" id="grade" placeholder="أدخل الصف">
+    <input type="text" id="school" placeholder="أدخل اسم المدرسة">
+    <input type="text" id="director" placeholder="أدخل اسم المدير">
     <button class="btn" onclick="showPopup()">عرض الشهادة</button>
   </div>
 
@@ -181,42 +161,31 @@
   </div>
 
   <div id="final-certificate" class="certificate-container">
-    <img class="logo" src="https://upload.wikimedia.org/wikipedia/ar/thumb/3/33/Ministry_of_Education_%28Saudi_Arabia%29_Logo.svg/512px-Ministry_of_Education_%28Saudi_Arabia%29_Logo.svg.png" onerror="this.style.display='none'">
+    <div class="title-container">
+      <img src="https://cdn-icons-png.flaticon.com/512/2583/2583391.png" class="medal">
+      <h1 class="title">شهادة تقدير</h1>
+      <img src="https://cdn-icons-png.flaticon.com/512/2583/2583391.png" class="medal">
+    </div>
 
- <div class="title-container">
-  <img src="https://cdn-icons-png.flaticon.com/512/2583/2583391.png" class="medal">
-  <h1 class="title">شهادة تقدير</h1>
-  <img src="https://cdn-icons-png.flaticon.com/512/2583/2583391.png" class="medal">
-</div>
-    
-
-<div id="student-name" class="recipient"></div>
+    <div id="student-name" class="recipient"></div>
     <div id="student-grade" class="grade"></div>
 
     <div class="thanks" id="thanks-message"></div>
 
     <div class="school-director">
       <span id="school-name"></span>
-      <div class="signature" id="signature-name">توقيع المدير/ة</div>
-      <span id="director-name"></span>
+      <span id="director-name">توقيع المدير/ة</span>
     </div>
   </div>
 
   <div class="footer-buttons">
-    <button class="btn" onclick="saveAsImage()">حفظ الصورة</button>
-    <button class="btn" onclick="window.print()">تحويل إلى PDF</button>
+    <button class="btn">حفظ الصورة</button>
+    <button class="btn">تحويل إلى PDF</button>
     <button class="btn" onclick="shareCertificate()">مشاركة</button>
   </div>
 
   <script>
     let countdown;
-
-    function hideCertificate() {
-      document.getElementById('final-certificate').style.display = 'none';
-      document.getElementById('popup').style.display = 'none';
-      clearInterval(countdown);
-    }
-
     function showPopup() {
       document.getElementById('popup').style.display = 'block';
       let time = 60;
@@ -244,41 +213,33 @@
       const grade = document.getElementById('grade').value;
       const school = document.getElementById('school').value;
       const director = document.getElementById('director').value;
-      const thanksText = document.getElementById('thanks-input').value || (type === 'الطالبة' ?
-        "نقدم لكِ أسمى آيات الشكر والتقدير على تفوقكِ المستمر وإبداعكِ الجميل.\nسائلين الله لكِ دوام التميز والتفوق." :
-        "نقدم لكَ أسمى آيات الشكر والتقدير على تفوقك المستمر وإبداعك المميز.\nسائلين الله لك دوام التميز والنجاح.");
 
       document.getElementById('student-name').textContent = `${type} : ${name}`;
       document.getElementById('student-grade').textContent = `الصف: ${grade}`;
-      document.getElementById('school-name').textContent = `المدرسة: ${school}`;
-      document.getElementById('director-name').textContent = `المدير/ة: ${director}`;
+      document.getElementById('school-name').textContent = `اسم المدرسة: ${school}`;
+      document.getElementById('director-name').textContent = `اسم المدير: ${director}`;
+
+      const thanksText = (type === 'الطالبة') ?
+        "نقدم لكِ أسمى آيات الشكر والتقدير\nعلى تفوقكِ المستمر وإبداعكِ الجميل\nسائلين الله لكِ دوام النجاح" :
+        "نقدم لكَ أسمى آيات الشكر والتقدير\nعلى تفوقك المستمر وإبداعك المميز\nسائلين الله لك دوام النجاح";
       document.getElementById('thanks-message').innerText = thanksText;
 
       document.getElementById('final-certificate').style.display = 'block';
     }
 
-    function saveAsImage() {
-      html2canvas(document.getElementById('final-certificate')).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'certificate.png';
-        link.href = canvas.toDataURL();
-        link.click();
-      });
-    }
-
     function shareCertificate() {
+      const certificateUrl = window.location.href;
+      const shareText = "شهادة تقدير للطالبة/الطالب المتفوق!";
       if (navigator.share) {
         navigator.share({
-          title: 'شهادة تقدير',
-          text: 'شاهد هذه الشهادة الرائعة!',
-          url: window.location.href
+          title: "شهادة تقدير",
+          text: shareText,
+          url: certificateUrl,
         });
       } else {
-        alert("ميزة المشاركة غير مدعومة في هذا المتصفح.");
+        alert("مشاركة غير مدعومة في المتصفح الحالي.");
       }
     }
   </script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
